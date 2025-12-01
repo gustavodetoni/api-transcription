@@ -14,8 +14,8 @@ export const categoryRoutes = new Elysia({
 })
   .use(requireDataAccess())
   .get(
-    '/',
-    async ({ query: { squadId } }) => {
+    '/:squadId',
+    async ({ params: { squadId } }) => {
       const fetchCategoriesUseCase = new FetchCategoriesBySquadUseCase(
         categoryRepository
       )
@@ -23,7 +23,7 @@ export const categoryRoutes = new Elysia({
     },
     {
       detail: { tags: ['Categories'] },
-      query: t.Object({
+      params: t.Object({
         squadId: t.String(),
       }),
     }
